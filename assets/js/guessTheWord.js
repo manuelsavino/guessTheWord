@@ -72,7 +72,9 @@ function newGame() {
         document.getElementById("word").innerHTML = displayLetters;
         document.getElementById("status").style.backgroundColor = "red";
         game.losses++
+        gamesPlayed++   
         document.getElementById("loses").innerHTML = game.losses;
+        document.getElementById("gamesPlayed").innerHTML = game.gamesPlaye
         //console.log(game.losses)
     }
 
@@ -103,7 +105,9 @@ function newGame() {
     function winsGame() {
         document.getElementById("status").style.backgroundColor = "green";
         game.wins++
+        game.gamesPlayed++
         document.getElementById("wins").innerHTML = game.wins;
+        document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed;
 
     }
 }
