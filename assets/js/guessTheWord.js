@@ -73,7 +73,7 @@ function newGame() {
         document.getElementById("status").style.backgroundColor = "red";
         game.losses++ 
         document.getElementById("loses").innerHTML = game.losses;
-        document.getElementById("gamesPlayed").innerHTML = game.gamesPlaye
+        document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed
         //console.log(game.losses)
     }
 
