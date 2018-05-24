@@ -11,8 +11,13 @@ var game = {
     gamesPlayed: 0
 }
 
+var gamePlay = true;
+
+console.log(game)
+
 function newGame() {
     newGamePrep();
+
     document.onkeyup = function (event) {
         var status = game.rightGuesses.length
         if (event.which >= 65 && event.which <= 90) {
@@ -21,14 +26,14 @@ function newGame() {
             alert("Only letters A-Z are allowed")
         }
 
-
+        var place;
 
         if (game.placeHolder.indexOf("_") != -1) {
             for (i = 0; i < game.wordLetters.length; i++) {
                 if (keyPressed === game.wordLetters[i]) {
                     game.rightGuesses.push(i);
                     game.placeHolder[i] = keyPressed;
-                    document.getElementById("word").innerHTML = game.placeHolder
+                    document.getElementById("word").innerHTML = game.placeHolder;
                     document.getElementById("message").innerHTML = ""
                 }
             }
@@ -48,65 +53,81 @@ function newGame() {
                 }
                 else //no more tries, you loose
                 {
-                    gameOver();
+                    while (gamePlay) {
+                        gameOver();
+                    }
+
                 }
             }
 
 
         }
         else {//No more letters to find
-            winsGame();
+            while (gamePlay) {
+                winsGame();
+            }
         }
         if (game.placeHolder.indexOf("_") == -1) {
-            winsGame();
+            while (gamePlay) {
+                winsGame();
+            }
         }
-
-    }
-
-    function gameOver() {
-        var displayLetters = ""
-        console.log("game over")
-        for (i = 0; i < game.wordLetters.length; i++) {
-            displayLetters += game.wordLetters[i] + " ";
-        }
-        document.getElementById("word").innerHTML = displayLetters;
-        document.getElementById("status").style.backgroundColor = "red";
-        game.losses++ 
-        document.getElementById("loses").innerHTML = game.losses;
-        document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed
-        //console.log(game.losses)
-    }
-
-    function newGamePrep() {
-        document.getElementById("status").style.backgroundColor = "white";
-        game.word = words[Math.floor(Math.random() * words.length)]
-        game.wordLetters = [];
-        game.rightGuesses = [];
-        game.placeHolder = [];
-        game.wrongGuesses = [];
-        game.gamesPlayed += 1;
-        document.getElementById("message").innerHTML = ""
-        document.getElementById("wrong").innerHTML = ""
-
-
-        //splits the word into letters into the wordLetters array
-        for (i = 0; i < game.word.length; i++) {
-            game.wordLetters.push(game.word.charAt(i))
-        }
-        //puts the right amount of _ on the placeHolder array
-        for (i = 0; i < game.wordLetters.length; i++) {
-            game.placeHolder.push("_")
-        }
-        console.log(game.wordLetters)
-        document.getElementById("word").innerHTML = game.placeHolder
-    }
-
-    function winsGame() {
-        document.getElementById("status").style.backgroundColor = "green";
-        game.wins++
-        document.getElementById("wins").innerHTML = game.wins;
-        document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed;
 
     }
 }
+function gameOver() {
+    var displayLetters = ""
+    console.log("game over")
+    for (i = 0; i < game.wordLetters.length; i++) {
+        displayLetters += game.wordLetters[i] + " ";
+    }
+    document.getElementById("word").innerHTML = displayLetters;
+    document.getElementById("status").style.backgroundColor = "red";
+    game.losses++
+    document.getElementById("loses").innerHTML = game.losses;
+    document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed
+    gamePlay = false;
+    //console.log(game.losses)
+}
+
+function winsGame() {
+    document.getElementById("status").style.backgroundColor = "green";
+    game.wins++
+    document.getElementById("wins").innerHTML = game.wins;
+    document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed;
+    gamePlay = false;
+
+}
+
+function newGamePrep() {
+    document.getElementById("status").style.backgroundColor = "white";
+    game.word = words[Math.floor(Math.random() * words.length)]
+    game.wordLetters = [];
+    game.rightGuesses = [];
+    game.placeHolder = [];
+    game.wrongGuesses = [];
+    game.gamesPlayed += 1;
+    document.getElementById("message").innerHTML = ""
+    document.getElementById("wrong").innerHTML = ""
+    gamePlay = true;
+
+
+    //splits the word into letters into the wordLetters array
+    for (i = 0; i < game.word.length; i++) {
+        game.wordLetters.push(game.word.charAt(i))
+    }
+    //puts the right amount of _ on the placeHolder array
+    for (i = 0; i < game.wordLetters.length; i++) {
+        game.placeHolder.push("_")
+    }
+    var place = ""
+    for (i = 0; i < game.placeHolder.length; i++) {
+        place += "_ "
+    }
+    console.log(game.wordLetters)
+    document.getElementById("word").innerHTML = place;
+}
+
+
+
 
