@@ -12,23 +12,72 @@
 </head>
 
 <body id="status">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #563d7c">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">Action 1</a>
+                            <a class="dropdown-item" href="#">Action 2</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
     <div class="container">
 
-        <div class="card" style="width: 200px;">
-            <div class="card-body">
-                <h5 class="card-title">Player Stats</h5>
-                <h6 class="card-subtitle">Wins: <span id="wins">0</span></h6>
-                <h6 class="card-subtitle">Loses: <span id="loses">0</span></h6>
-                <h6 class="card-subtitle">Games Played: <span id="gamesPlayed">0</span></h6>
+        <div class="row>">
+            <div class="col-md-6">
+                <h1>Guess The Bootstrap Component!</h1>
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="width: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Player Stats</h5>
+                        <h6 class="card-subtitle">Wins:
+                            <span id="wins">0</span>
+                        </h6>
+                        <h6 class="card-subtitle">Loses:
+                            <span id="loses">0</span>
+                        </h6>
+                        <h6 class="card-subtitle">Games Played:
+                            <span id="gamesPlayed">0</span>
+                        </h6>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <h1>Guess The Word</h1>
-        <button type="button" onclick="newGame()">New Game</button>
+        <div class="jumbotron">
+            <h1 class="display-4">Word:
+                <span id="word"></span>
+            </h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content
+                or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" onclick="newGame()" role="button">New Game</a>
+            </p>
+        </div>
 
-        <h2>Word:
-            <span id="word"></span>
-        </h2>
+
+
         <h3>Wrong Guesses:
             <span id="wrong"></span>
         </h3>
