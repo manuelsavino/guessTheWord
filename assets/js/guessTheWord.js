@@ -99,6 +99,12 @@ function gameOver() {
     document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed
     game.gamePlay = false;
     document.getElementById("progress").setAttribute("style", "width:0%")
+    document.getElementById("redCard").style.display="block"
+    document.getElementById("redCard").classList.add("zoomInDown")
+    setTimeout(function(){
+        document.getElementById("redCard").classList.remove("zoomInDown")
+        document.getElementById("redCard").classList.add("bounceOutLeft")
+    },3000);
 }
 
 function winsGame() {
