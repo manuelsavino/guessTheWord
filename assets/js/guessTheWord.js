@@ -17,13 +17,15 @@ var game = {
 
 function newGame() {
     newGamePrep();
+    $('#exampleModal').modal({ show: false})
 
     document.onkeyup = function (event) {
         var status = game.rightGuesses.length
         if (event.which >= 65 && event.which <= 90) {
             var keyPressed = (event.key).toLocaleLowerCase()
         } else {
-            alert("Only letters A-Z are allowed")
+            //alert("Only letters A-Z are allowed")
+            $('#exampleModal').modal('show');
         }
 
         // var place;
