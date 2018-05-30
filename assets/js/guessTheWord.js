@@ -26,7 +26,7 @@ function newGame() {
             alert("Only letters A-Z are allowed")
         }
 
-        var place;
+        // var place;
 
         if (game.placeHolder.indexOf("_") != -1) {
             for (i = 0; i < game.wordLetters.length; i++) {
@@ -39,13 +39,24 @@ function newGame() {
             }
             if (status === game.rightGuesses.length)//items on right guesses didnt change
             {
-                if (game.wrongGuesses.length < 7)//If you still have more tries
+                if (game.wrongGuesses.length != 9)//If you still have more tries
                 {
                     if (game.wrongGuesses.indexOf(keyPressed) == -1)//letter is not on the array, hasnt been pressed 
                     {
+                        var gameStatus = (100 - (game.wrongGuesses.length * 10))
                         game.wrongGuesses.push(keyPressed);
                         document.getElementById("message").innerHTML = "";
                         document.getElementById("wrong").innerHTML = game.wrongGuesses;
+                        if (gameStatus <= 50 && gameStatus > 30) {
+                            document.getElementById("progress").classList.remove("bg-success")
+                            document.getElementById("progress").classList.add("bg-warning")
+                        }
+                        else if (gameStatus <= 30) {
+                            document.getElementById("progress").classList.remove("bg-warning")
+                            document.getElementById("progress").classList.add("bg-danger")
+                        }
+                        document.getElementById("progress").setAttribute("style", `width: ${gameStatus}%`);
+
                     }
                     else {//letter is on the array meaning it was tried already
                         document.getElementById("message").innerHTML = "Letter already tried";
@@ -82,16 +93,20 @@ function gameOver() {
         displayLetters += game.wordLetters[i] + " ";
     }
     document.getElementById("word").innerHTML = displayLetters;
-    document.getElementById("status").style.backgroundColor = "red";
+    document.getElementById("status").style.backgroundColor = "#e74c3c";
     game.losses++
     document.getElementById("loses").innerHTML = game.losses;
     document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed
     gamePlay = false;
-    //console.log(game.losses)
+    document.getElementById("progress").setAttribute("style", "width:0%")
 }
 
 function winsGame() {
-    document.getElementById("status").style.backgroundColor = "green";
+    document.getElementById("status").style.backgroundColor = "#27ae60";
+    document.getElementById("progress").classList.remove("bg-danger")
+    document.getElementById("progress").classList.remove("bg-warning")
+    document.getElementById("progress").classList.add("bg-success")
+    document.getElementById("progress").setAttribute("style", "width: 100%;");
     game.wins++
     document.getElementById("wins").innerHTML = game.wins;
     document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed;
@@ -100,7 +115,11 @@ function winsGame() {
 }
 
 function newGamePrep() {
-    document.getElementById("status").style.backgroundColor = "white";
+    document.getElementById("status").style.backgroundColor = "#e9ecef";
+    document.getElementById("progress").classList.remove("bg-danger")
+    document.getElementById("progress").classList.remove("bg-warning")
+    document.getElementById("progress").classList.add("bg-success")
+    document.getElementById("progress").setAttribute("style", "width: 100%;");
     game.word = words[Math.floor(Math.random() * words.length)]
     game.wordLetters = [];
     game.rightGuesses = [];
