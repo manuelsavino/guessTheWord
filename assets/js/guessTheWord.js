@@ -1,4 +1,4 @@
-var words = ["word", "dog", "potato", "house", "javascript", "computer"]
+var words = ["Russia","Uruguay","Egypt","Portugal","Spain","Iran","Morocco","France","Peru","Denmark","Australia","Argentina","Croatia","Iceland","Nigeria","Brazil","Switzerland","Serbia","Germany","Mexico","Sweden","Belgium","England","Tunisia","Panama","Poland","Colombia","Senegal","Japan"]
 
 var game = {
     word: "",
@@ -107,6 +107,13 @@ function winsGame() {
     document.getElementById("progress").classList.remove("bg-warning")
     document.getElementById("progress").classList.add("bg-success")
     document.getElementById("progress").setAttribute("style", "width: 100%;");
+    document.getElementById("ball").style.display="block"
+    document.getElementById("ball").classList.add("zoomInDown")
+    setTimeout(function(){
+        document.getElementById("ball").classList.remove("zoomInDown")
+        document.getElementById("ball").classList.add("bounceOutRight")
+    },2000);
+    
     game.wins++
     document.getElementById("wins").innerHTML = game.wins;
     document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed;
@@ -133,7 +140,7 @@ function newGamePrep() {
 
     //splits the word into letters into the wordLetters array
     for (i = 0; i < game.word.length; i++) {
-        game.wordLetters.push(game.word.charAt(i))
+        game.wordLetters.push(game.word.charAt(i).toLowerCase())
     }
     //puts the right amount of _ on the placeHolder array
     for (i = 0; i < game.wordLetters.length; i++) {
