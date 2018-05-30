@@ -8,12 +8,12 @@ var game = {
     placeHolder: [],
     wins: 0,
     losses: 0,
-    gamesPlayed: 0
+    gamesPlayed: 0,
+    gamePlay: true
 }
 
-var gamePlay = true;
+//var gamePlay = true;
 
-console.log(game)
 
 function newGame() {
     newGamePrep();
@@ -64,7 +64,7 @@ function newGame() {
                 }
                 else //no more tries, you loose
                 {
-                    while (gamePlay) {
+                    while (game.gamePlay) {
                         gameOver();
                     }
 
@@ -74,12 +74,12 @@ function newGame() {
 
         }
         else {//No more letters to find
-            while (gamePlay) {
+            while (game.gamePlay) {
                 winsGame();
             }
         }
         if (game.placeHolder.indexOf("_") == -1) {
-            while (gamePlay) {
+            while (game.gamePlay) {
                 winsGame();
             }
         }
@@ -97,7 +97,7 @@ function gameOver() {
     game.losses++
     document.getElementById("loses").innerHTML = game.losses;
     document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed
-    gamePlay = false;
+    game.gamePlay = false;
     document.getElementById("progress").setAttribute("style", "width:0%")
 }
 
@@ -110,7 +110,7 @@ function winsGame() {
     game.wins++
     document.getElementById("wins").innerHTML = game.wins;
     document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed;
-    gamePlay = false;
+    game.gamePlay = false;
 
 }
 
@@ -128,7 +128,7 @@ function newGamePrep() {
     game.gamesPlayed += 1;
     document.getElementById("message").innerHTML = ""
     document.getElementById("wrong").innerHTML = ""
-    gamePlay = true;
+    game.gamePlay = true;
 
 
     //splits the word into letters into the wordLetters array
