@@ -1,4 +1,4 @@
-var words = ["Russia","Uruguay","Egypt","Portugal","Spain","Iran","Morocco","France","Peru","Denmark","Australia","Argentina","Croatia","Iceland","Nigeria","Brazil","Switzerland","Serbia","Germany","Mexico","Sweden","Belgium","England","Tunisia","Panama","Poland","Colombia","Senegal","Japan"]
+var words = ["Russia", "Uruguay", "Egypt", "Portugal", "Spain", "Iran", "Morocco", "France", "Peru", "Denmark", "Australia", "Argentina", "Croatia", "Iceland", "Nigeria", "Brazil", "Switzerland", "Serbia", "Germany", "Mexico", "Sweden", "Belgium", "England", "Tunisia", "Panama", "Poland", "Colombia", "Senegal", "Japan"]
 
 var game = {
     word: "",
@@ -12,12 +12,12 @@ var game = {
     gamePlay: true
 }
 
-//var gamePlay = true;
+
 
 
 function newGame() {
     newGamePrep();
-    $('#exampleModal').modal({ show: false})
+    $('#exampleModal').modal({ show: false })
 
     document.onkeyup = function (event) {
         var status = game.rightGuesses.length
@@ -28,17 +28,33 @@ function newGame() {
             $('#exampleModal').modal('show');
         }
 
-        // var place;
+        var place = ""
 
         if (game.placeHolder.indexOf("_") != -1) {
             for (i = 0; i < game.wordLetters.length; i++) {
                 if (keyPressed === game.wordLetters[i]) {
                     game.rightGuesses.push(i);
                     game.placeHolder[i] = keyPressed;
-                    document.getElementById("word").innerHTML = game.placeHolder;
+                    //document.getElementById("word").innerHTML = game.placeHolder;
                     document.getElementById("message").innerHTML = ""
                 }
             }
+
+            for (i = 0; i < game.placeHolder.length; i++) {
+                if(game.placeHolder[i] === "_")
+                {
+                    place += "_ "
+                    console.log(place)
+                }
+                else
+                {
+                    place += game.placeHolder[i] + " "
+                }
+                
+            }
+            console.log(game.wordLetters)
+            document.getElementById("word").innerHTML = place;
+            
             if (status === game.rightGuesses.length)//items on right guesses didnt change
             {
                 if (game.wrongGuesses.length != 9)//If you still have more tries
@@ -87,6 +103,7 @@ function newGame() {
         }
 
     }
+    
 }
 function gameOver() {
     var displayLetters = ""
@@ -98,15 +115,18 @@ function gameOver() {
     document.getElementById("status").style.backgroundColor = "#e74c3c";
     game.losses++
     document.getElementById("loses").innerHTML = game.losses;
+    game.gamesPlayed += 1;
     document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed
     game.gamePlay = false;
+    game.placeHolder = game.wordLetters.slice(0);
     document.getElementById("progress").setAttribute("style", "width:0%")
-    document.getElementById("redCard").style.display="block"
+    document.getElementById("redCard").style.display = "block"
     document.getElementById("redCard").classList.add("zoomInDown")
-    setTimeout(function(){
+    setTimeout(function () {
         document.getElementById("redCard").classList.remove("zoomInDown")
         document.getElementById("redCard").classList.add("bounceOutLeft")
-    },3000);
+    }, 3000);
+    
 }
 
 function winsGame() {
@@ -115,15 +135,16 @@ function winsGame() {
     document.getElementById("progress").classList.remove("bg-warning")
     document.getElementById("progress").classList.add("bg-success")
     document.getElementById("progress").setAttribute("style", "width: 100%;");
-    document.getElementById("ball").style.display="block"
+    document.getElementById("ball").style.display = "block"
     document.getElementById("ball").classList.add("zoomInDown")
-    setTimeout(function(){
+    setTimeout(function () {
         document.getElementById("ball").classList.remove("zoomInDown")
         document.getElementById("ball").classList.add("bounceOutRight")
-    },2000);
-    
+    }, 2000);
+
     game.wins++
     document.getElementById("wins").innerHTML = game.wins;
+    game.gamesPlayed += 1;
     document.getElementById("gamesPlayed").innerHTML = game.gamesPlayed;
     game.gamePlay = false;
 
@@ -140,7 +161,7 @@ function newGamePrep() {
     game.rightGuesses = [];
     game.placeHolder = [];
     game.wrongGuesses = [];
-    game.gamesPlayed += 1;
+    
     document.getElementById("message").innerHTML = ""
     document.getElementById("wrong").innerHTML = ""
     game.gamePlay = true;
