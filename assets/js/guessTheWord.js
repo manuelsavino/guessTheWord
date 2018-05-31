@@ -122,6 +122,8 @@ function gameOver() {
     document.getElementById("progress").setAttribute("style", "width:0%")
     document.getElementById("redCard").style.display = "block"
     document.getElementById("redCard").classList.add("zoomInDown")
+    var audio = new Audio('assets/sounds/gameover.mp3');
+    audio.play();
     setTimeout(function () {
         document.getElementById("redCard").classList.remove("zoomInDown")
         document.getElementById("redCard").classList.add("bounceOutLeft")
